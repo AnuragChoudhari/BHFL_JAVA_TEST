@@ -16,10 +16,10 @@ public class StartupRunner {
     }
 
     public void run(String... args) {
-        // Step 1: Generate webhook and token
+        // Generate webhook and token
         WebhookResponse response = webhookService.generateWebhook();
 
-        // Step 2: Write your SQL query here (this is your final solution)
+ 
         String finalSqlQuery = "SELECT e1.EMP_ID, e1.FIRST_NAME, e1.LAST_NAME, " +
                 "d.DEPARTMENT_NAME, COUNT(e2.EMP_ID) AS YOUNGER_EMPLOYEES_COUNT " +
                 "FROM EMPLOYEE e1 " +
@@ -28,7 +28,7 @@ public class StartupRunner {
                 "GROUP BY e1.EMP_ID, e1.FIRST_NAME, e1.LAST_NAME, d.DEPARTMENT_NAME " +
                 "ORDER BY e1.EMP_ID DESC;";
 
-        // Step 3: Submit final query using token
+        // Submit final query using token
         webhookService.submitFinalQuery(response.getWebhook(), response.getAccessToken(), finalSqlQuery);
     }
 	
